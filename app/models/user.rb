@@ -4,7 +4,11 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
+  validates :password_digest, presence: true
+# validate_presence_of :password_digest
 
+  has_secure_password
+  
   def party_host
     viewing_parties.where(user_viewing_parties: {host: true})
   end
