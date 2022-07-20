@@ -4,8 +4,10 @@ RSpec.describe 'User Dashboard Page', type: :feature do
 
   describe 'data is displayed on page'do
     it 'shows user name on dashboard' do
-      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
-      user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      # user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+      # user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net', password: 'hi')
+      user2 = User.create!(name: 'Lola', email: 'lola@example.com', password: 'hola')
 
       visit user_path(user1.id)
       expect(page).to have_content("#{user1.name}'s Dashboard")
@@ -13,8 +15,10 @@ RSpec.describe 'User Dashboard Page', type: :feature do
     end
 
     it 'has a button to Discover Movies' do
-      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
-      user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      # user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+      # user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net', password: 'hi')
+      user2 = User.create!(name: 'Lola', email: 'lola@example.com', password: 'hola')
 
       visit user_path(user1.id)
       expect(page).to have_button('Discover Movies')
@@ -24,18 +28,22 @@ RSpec.describe 'User Dashboard Page', type: :feature do
     end
 
     it "has a section that listing viewing parties" do
-      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
-      user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      # user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+      # user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net', password: 'hi')
+      user2 = User.create!(name: 'Lola', email: 'lola@example.com', password: 'hola')
 
       visit user_path(user1.id)
       expect(page).to have_content("Viewing Parties")
     end
   end
 
-  describe 'viewing parties section' do 
-    it 'shows the movie attributes', :vcr do 
-      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
-      user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+  describe 'viewing parties section' do
+    it 'shows the movie attributes', :vcr do
+      # user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+      # user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net', password: 'hi')
+      user2 = User.create!(name: 'Lola', email: 'lola@example.com', password: 'hola')
 
       party1 = ViewingParty.create!(movie_id: 129, duration: 96, date: Date.new(2022,9,7), start_time: "16:00:00")
       party2 = ViewingParty.create!(movie_id: 545611, duration: 175, date: Date.new(2023,4,4), start_time: "19:00:00")
@@ -46,7 +54,7 @@ RSpec.describe 'User Dashboard Page', type: :feature do
       user_viewing3 = UserViewingParty.create!(user_id: user2.id, viewing_party_id: party3.id, host: false)
 
       visit user_path(user1.id)
-      within '.invites' do 
+      within '.invites' do
         expect(page).to have_content('Spirited Away')
         expect(page).to have_content('Everything Everywhere All at Once')
         expect(page).to_not have_content('Thor Ragnarok')
@@ -55,23 +63,28 @@ RSpec.describe 'User Dashboard Page', type: :feature do
       expect(current_path).to eq(user_movie_path(user1.id, party1.movie_id))
     end
 
-    it 'shows the party attributes', :vcr do 
-      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+    it 'shows the party attributes', :vcr do
+      # user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net', password: 'hi')
+
       party1 = ViewingParty.create!(movie_id: 129, duration: 96, date: Date.new(2022,9,7), start_time: "16:00:00")
       user_viewing1 = UserViewingParty.create!(user_id: user1.id, viewing_party_id: party1.id, host: false)
 
       visit user_path(user1.id)
 
-      within '.invites' do 
+      within '.invites' do
         expect(page).to have_content("Date: Sep 7, 2022")
         expect(page).to have_content(" 4:00 PM")
       end
     end
 
-    it 'can identify the host', :vcr do 
-      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
-      user2 = User.create!(name: 'Lola', email: 'lola@example.com')
-      user3 = User.create!(name: 'Squiggles', email: 'goblindog@dogsshouldbeabletovote.org')
+    it 'can identify the host', :vcr do
+      # user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+      # user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      # user3 = User.create!(name: 'Squiggles', email: 'goblindog@dogsshouldbeabletovote.org')
+      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net', password: 'hi')
+      user2 = User.create!(name: 'Lola', email: 'lola@example.com', password: 'hola')
+      user3 = User.create!(name: 'Squiggles', email: 'goblindog@dogsshouldbeabletovote.org', password: 'gibble')
 
       party1 = ViewingParty.create!(movie_id: 129, duration: 96, date: Date.new(2022,9,7), start_time: "16:00:00")
 
@@ -80,17 +93,21 @@ RSpec.describe 'User Dashboard Page', type: :feature do
       user_viewing3 = UserViewingParty.create!(user_id: user3.id, viewing_party_id: party1.id, host: true)
 
       visit user_path(user1.id)
-      within '.invites' do 
+      within '.invites' do
         expect(page).to have_content("Host: Squiggles")
         expect(page).to_not have_content("Host: Parker")
       end
-    end 
+    end
 
-    it 'can list the attendees', :vcr do 
-      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
-      user2 = User.create!(name: 'Lola', email: 'lola@example.com')
-      user3 = User.create!(name: 'Squiggles', email: 'goblindog@dogsshouldbeabletovote.org')
-      user4 = User.create!(name: 'Pancakes', email: 'spacecadet42@hootmail.com')
+    it 'can list the attendees', :vcr do
+      # user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net')
+      # user2 = User.create!(name: 'Lola', email: 'lola@example.com')
+      # user3 = User.create!(name: 'Squiggles', email: 'goblindog@dogsshouldbeabletovote.org')
+      # user4 = User.create!(name: 'Pancakes', email: 'spacecadet42@hootmail.com')
+      user1 = User.create!(name: 'Parker', email: 'mangaforever@hootube.net', password: 'hi')
+      user2 = User.create!(name: 'Lola', email: 'lola@example.com', password: 'hola')
+      user3 = User.create!(name: 'Squiggles', email: 'goblindog@dogsshouldbeabletovote.org', password: 'gibble')
+      user4 = User.create!(name: 'Pancakes', email: 'spacecadet42@hootmail.com', password: 'aja')
 
       party1 = ViewingParty.create!(movie_id: 129, duration: 96, date: Date.new(2022,9,7), start_time: "16:00:00")
 
@@ -101,12 +118,12 @@ RSpec.describe 'User Dashboard Page', type: :feature do
 
       visit user_path(user1.id)
 
-      within ".guests" do 
+      within ".guests" do
         expect(page).to have_content("Parker")
         expect(page).to have_content("Pancakes")
         expect(page).to have_content("Lola")
         expect(page).to_not have_content("Squiggles")
       end
     end
-  end 
+  end
 end

@@ -10,11 +10,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    new_user = User.new(user_params)
-    if new_user.save
-      redirect_to user_path(new_user.id), notice: "Welcome, #{new_user.name}!"
+    user = User.new(user_params)
+    if user.save
+      session[:user_id] = user.id
+      redirect_to root_path, notice: "Welcome, #{user.name}!"
+      # user_path(user.id)
     else
-      redirect_to register_path, alert: new_user.errors.full_messages
+      redirect_to register_path, alert: user.errors.full_messages
    end
   end
 

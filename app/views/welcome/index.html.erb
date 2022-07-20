@@ -4,7 +4,7 @@
 
 <% @users.each do |user| %>
 <div id="user-<%= user.id %>">
-  <%= link_to "#{user.name}", user_path(user.id) %>
+  <%= link_to "#{user.name}", users_path(user.id) %>
   <%= user.email %>
 </div>
 <% end %>

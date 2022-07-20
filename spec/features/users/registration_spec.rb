@@ -7,7 +7,7 @@ RSpec.describe 'user_registration' do
     name = "becky"
     email = "becky@test.com"
     password = "hola"
-    
+
 
     fill_in :user_email, with: email
     fill_in :user_name, with: name

@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'movie show page' do
   before(:each) do
-    @user1 = User.create!(name: 'Ana', email: 'ana@example.com')
+    # @user1 = User.create!(name: 'Ana', email: 'ana@example.com')
+    @user1 = User.create!(name: 'Ana', email: 'ana@example.com', password: 'test')
     @movie1 = Movie.new(title: 'The Godfather', id: 238, genres:[
         {
             "id": 18,
@@ -62,7 +63,9 @@ RSpec.describe 'movie show page' do
   context 'cast members , reviews and authors' do
 
   it "displays list of 10 first cast members", :vcr do
-    @user = User.create!(name: 'Badger', email: 'honey@gmail.com')
+    # @user = User.create!(name: 'Badger', email: 'honey@gmail.com')
+    @user = User.create!(name: 'Badger', email: 'honey@gmail.com', password: 'yep')
+
     visit user_movie_path(@user.id, 238)
 
     expect(page).to have_content("Actor: Marlon Brando is Character: Don Vito Corleone")
@@ -79,7 +82,8 @@ RSpec.describe 'movie show page' do
   end
 
   it "displays count of total reviews", :vcr do
-    @user = User.create!(name: 'Badger', email: 'honey@gmail.com')
+    # @user = User.create!(name: 'Badger', email: 'honey@gmail.com')
+    @user = User.create!(name: 'Badger', email: 'honey@gmail.com', password: 'yep')
     visit user_movie_path(@user.id, 238)
 
     expect(page).to have_content("1")
@@ -87,7 +91,8 @@ RSpec.describe 'movie show page' do
   end
 
   it "displays each review's author and information", :vcr do
-    @user = User.create!(name: 'Badger', email: 'honey@gmail.com')
+    # @user = User.create!(name: 'Badger', email: 'honey@gmail.com')
+    @user = User.create!(name: 'Badger', email: 'honey@gmail.com', password: 'yep')
     visit user_movie_path(@user.id, 238)
 
     expect(page).to have_content("The Godfather Review")

@@ -1,3 +1,11 @@
+<% if current_user %>
+<p>You are logged in!</p>
+<%= link_to "Log out", '/logout', method: :delete %>
+<% else %>
+<%= link_to "Register as a User", new_user_path %>
+<%= link_to "Log In", login_path %>
+<% end %>
+
 <h1> <%= @user.name %>'s Dashboard</h1>
   <p>
 <div class="container" align="center" id="discover_movies">
